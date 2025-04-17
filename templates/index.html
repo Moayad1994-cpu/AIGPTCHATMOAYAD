@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI MOAYAD DUGHMOSH GPT CHAT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for Icons (replace with your preferred icon library if needed) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>"> <!-- Basic Emoji Favicon -->
+</head>
+<body>
+    <header>
+        <h1>AI MOAYAD DUGHMOSH GPT CHAT</h1>
+        <div class="controls">
+             <button id="clear-chat-button" title="Clear Conversation">
+                <i class="fas fa-trash"></i>
+            </button>
+            <button id="theme-toggle-button" title="Toggle Theme">
+                <i class="fas fa-sun"></i> <!-- Initial icon (sun for light mode) -->
+            </button>
+        </div>
+    </header>
+
+    <main id="chat-container">
+        <div id="chat-box">
+            <!-- Messages will be loaded here by Flask and JS -->
+             {% for message in conversation %}
+                 <div class="message {{ 'user' if message.role == 'user' else 'assistant' }}-message">
+                     <div class="message-content">
+                        <!-- Render newlines correctly -->
+                        {{ message.content | replace('\n', '<br>') | safe }}
+                     </div>
+                 </div>
+            {% endfor %}
+             <div class="message assistant-message initial-message">
+                 <div class="message-content">
+                    Hello! How can I help you today?
+                 </div>
+             </div>
+        </div>
+
+        <div id="input-area">
+            <textarea id="user-input" placeholder="Type your message here..." rows="1"></textarea>
+            <button id="send-button" title="Send Message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <p>MADE BY AI MOAYAD DUGHMOSH</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
